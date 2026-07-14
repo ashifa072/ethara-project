@@ -1,5 +1,6 @@
-import enum
+import enum 
 from datetime import date, datetime
+from typing import Optional
 
 from sqlalchemy import (
     Boolean,
@@ -45,8 +46,8 @@ class Project(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     name: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
-    description: Mapped[str | None] = mapped_column(String(500))
-    manager_name: Mapped[str | None] = mapped_column(String(100))
+    description: Mapped[Optional[str]] = mapped_column(String(500))
+    manager_name: Mapped[Optional[str]] = mapped_column(String(100))
     status: Mapped[ProjectStatus] = mapped_column(
         Enum(ProjectStatus), default=ProjectStatus.ACTIVE
     )
@@ -69,7 +70,11 @@ class Employee(Base):
     status: Mapped[EmploymentStatus] = mapped_column(
         Enum(EmploymentStatus), default=EmploymentStatus.ACTIVE
     )
-    project_id: Mapped[int | None] = mapped_column(ForeignKey("projects.id"), nullable=True)
+    project_id: Mapped[Optional[int]] = mapped_column(
+    ForeignKey("projects.id"), nullable=True
+)
+
+    project: Mapped[Optional[Project]] = relationship(back_populates="employees")
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(
         DateTime, server_default=func.now(), onupdate=func.now()
@@ -104,13 +109,17 @@ class SeatAllocation(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     employee_id: Mapped[int] = mapped_column(ForeignKey("employees.id"), nullable=False, index=True)
     seat_id: Mapped[int] = mapped_column(ForeignKey("seats.id"), nullable=False, index=True)
-    project_id: Mapped[int | None] = mapped_column(ForeignKey("projects.id"), nullable=True)
+    project_id: Mapped[Optional[int]] = mapped_column(
+    ForeignKey("projects.id"), nullable=True
+)
     allocation_status: Mapped[AllocationStatus] = mapped_column(
         Enum(AllocationStatus), default=AllocationStatus.ACTIVE, index=True
     )
     allocation_date: Mapped[date] = mapped_column(Date, nullable=False)
-    released_date: Mapped[date | None] = mapped_column(Date, nullable=True)
+    released_date: Mapped[Optional[date]] = mapped_column(
+    Date, nullable=True
+)
 
     employee: Mapped[Employee] = relationship(back_populates="allocations")
     seat: Mapped[Seat] = relationship(back_populates="allocations")
-    project: Mapped[Project | None] = relationship(back_populates="allocations")
+    project: Mapped[Optional[Project]] = relationship(back_populates="allocations")
