@@ -80,7 +80,6 @@ class Employee(Base):
         DateTime, server_default=func.now(), onupdate=func.now()
     )
 
-    project: Mapped[Project | None] = relationship(back_populates="employees")
     allocations: Mapped[list["SeatAllocation"]] = relationship(back_populates="employee")
 
 
