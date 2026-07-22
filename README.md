@@ -358,7 +358,7 @@ NEXT_PUBLIC_API_URL=https://your-backend.railway.app/api
 
 ## Deployment
 
-### Deploy Backend (Railway / Render)
+### Deploy Backend (Render)
 
 1. Push the `backend/` folder to a Git repository
 2. Set the start command:
@@ -370,7 +370,7 @@ NEXT_PUBLIC_API_URL=https://your-backend.railway.app/api
    - `CORS_ORIGINS` — Your frontend URL
 4. Note the deployed backend URL (e.g. `https://ethara-api.railway.app`)
 
-### Deploy Frontend (Vercel / Netlify)
+### Deploy Frontend (Render)
 
 1. Push the `frontend/` folder to a Git repository
 2. Set build command: `npm run build`
@@ -508,32 +508,5 @@ npm install
 npm run build
 ```
 
----
 
-## Submission Deliverables
 
-| Deliverable | Location |
-|-------------|----------|
-| GitHub repository | Push this project to GitHub |
-| Live deployment | Deploy backend + frontend (see [Deployment](#deployment)) |
-| README.md | This file |
-| AI_PROMPTS.md | [AI_PROMPTS.md](./AI_PROMPTS.md) |
-| Database schema | [DATABASE_SCHEMA.md](./DATABASE_SCHEMA.md) |
-| Sample seed data | `backend/seed.py` |
-| API documentation | http://localhost:8000/docs (Swagger) |
-| Debugging notes | [AI_PROMPTS.md § Debugging](./AI_PROMPTS.md) |
-| Deployment notes | [Deployment](#deployment) section above |
-
----
-
-## Related Documentation
-
-| Document | Description |
-|----------|-------------|
-| [AI_PROMPTS.md](./AI_PROMPTS.md) | All AI prompts used, validation notes, manual fixes |
-| [DATABASE_SCHEMA.md](./DATABASE_SCHEMA.md) | Full database schema with ER diagram |
-| [Swagger UI](http://localhost:8000/docs) | Interactive API documentation (when backend is running) |
-
----
-
-**Built for Ethara — Vibe Coding Assessment**
